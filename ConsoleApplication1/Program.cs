@@ -19,7 +19,7 @@ namespace ConsoleApplication1
         {
             const string CLIENT_ID = "mtohvlhbb3xd8z43a6u2zirvb1060tui";
             const string CLIENT_SECRET = "TdSrr7mFXtf6xEhdiJrRBiE2H1nnWGM6";
-            const string DEV_ACCESS_TOKEN = "pZ5V4FmBJ4RXtaqdYQnS04Znuy71Yp7w";
+            const string DEV_ACCESS_TOKEN = "xK8RVHcAC6OfGYwmrIjzS9Q7oHCcC88C";
             const string REFRESH_TOKEN = "helloworld";
             Console.WriteLine("Beginning");
             try
@@ -44,17 +44,27 @@ namespace ConsoleApplication1
         static async Task MainAsync(BoxClient client)
         {
             BoxFolder root = await client.FoldersManager.GetInformationAsync("0");
-            // = new BoxUserRequest();
+                var request = new BoxUserRequest();
            
                 // BoxUser user = await client.UsersManager.UpdateUserInformationAsync();
-
+            
                 List<string> fields = new List<string>();
                 fields.Add("Name");
-                BoxUser user2 = await client.UsersManager.GetCurrentUserInformationAsync(fields);
+                BoxUser user2 = await client.UsersManager.GetCurrentUserInformationAsync(null);
                 foreach (var prop in user2.GetType().GetProperties())
                 {
                     Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user2, null));
                 }
+                fields.ForEach(i => Console.Write("{0}\t", i));
+                user2.Name = "JAMES MCJOHN";
+                user2.Phone = "7154848651";
+               // user2.Enterprise =null;
+               // foreach (var prop in user2.GetType().GetProperties())
+              //  {
+             //       Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user2, null));
+              //  }
+                //ForEach(Console.WriteLine("{0}, {1}", fields);
+                //BoxUser user3 = await client.UsersManager.UpdateUserInformationAsync(request);
  //           await LoadFolder(root);
         }
 
