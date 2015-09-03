@@ -50,14 +50,13 @@ namespace ConsoleApplication1
                 var request = new BoxUserRequest();
                 request.Id = "221744691"; 
 
-                
-            
-            request.TrackingCodes = new[] {"1234578"}; 
+                string[] numbers = new string[5];
+            numbers[1] = "1234567";
+            request.TrackingCodes = numbers;
             //Console.WriteLine(request.TrackingCodes.GetValue(1));
             var trackcodes = new List<string> { null };
 
-            BoxUser user = await client.UsersManager.UpdateUserInformationAsync(request);
-            
+            BoxUser user = await client.UsersManager.UpdateUserInformationAsync(request, trackcodes);
             foreach (var prop in user.GetType().GetProperties())
             {
                 Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user, null));
@@ -66,8 +65,8 @@ namespace ConsoleApplication1
             //{
             //    Console.WriteLine(code);
             //}
-            
-            Console.WriteLine("SPACEEEEEEEEE JAAAAMMMMM" + user.TrackingCodes);
+
+            Console.WriteLine("SPACEEEEEEEEE JAAAAMMMMM");
 
             BoxUser user2 = await client.UsersManager.GetCurrentUserInformationAsync(null);
             foreach (var prop in user2.GetType().GetProperties())
