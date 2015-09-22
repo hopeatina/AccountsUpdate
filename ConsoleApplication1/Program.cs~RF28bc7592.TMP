@@ -20,7 +20,7 @@ namespace ConsoleApplication1
         {
             const string CLIENT_ID = "ay450o57uod43241xuu7krbaqpmizzsh";
             const string CLIENT_SECRET = "b8OQcifI9F7MV9aYSCBIa0XlgUHX0uhl";
-            const string DEV_ACCESS_TOKEN = "vk7SaAcLnFZ4rFEXcmB6709cHLsIOAo2"; // refresh from https://mdaccdev.app.box.com/developers/services/edit/134958
+            const string DEV_ACCESS_TOKEN = "IPHfzpv2w6v0OlUcX1y3ISiLBKLs0zU3"; // refresh from https://mdaccdev.app.box.com/developers/services/edit/134958
             const string REFRESH_TOKEN = "helloworld";
             Console.WriteLine("Beginning");
             try
@@ -47,72 +47,72 @@ namespace ConsoleApplication1
 
         static async Task MainAsync(BoxClient client)
         {
-            var trackingcodes = new[] {"EmployeeID"};
-            var request = new BoxUserRequest();
-            //{TrackingCodes = trackingcodes};
+            var trackingcodes =new[] {"1234567"};
+            var request = new BoxUserRequest {TrackingCodes = trackingcodes};
+            //{Id = "221744691"};
             //Console.WriteLine(request.TrackingCodes.GetValue(1));
             //var trackcodes = new List<string> { null };
-            request.TrackingCodes = new[] {"1234578"};
-            request.Id = "";
-            var trackcodes = new List<string>(new String[] {"tracking_codes"});
+            //request.TrackingCodes = new[] {"1234578"};
+            var trackcodes = new List<string>(new String[] { "tracking_codes" });
 
 
             BoxUser user = await client.UsersManager.UpdateUserInformationAsync(request,trackcodes);
-
+            
             foreach (var prop in user.GetType().GetProperties())
             {
                 Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user, null));
+
             }
             //foreach (var code in user.TrackingCodes)
             //{
             //    Console.WriteLine(code);
             //}
-
-            Console.WriteLine("                       " + request.TrackingCodes[0] + " " +
-                              user.GetType().GetProperty("TrackingCodes").GetValue(user, new object[0]));
+            
+            Console.WriteLine("                       " + request.TrackingCodes[0] + " " + user.GetType().GetProperty("TrackingCodes").GetValue(user,new object[0]));
 
             BoxUser user2 = await client.UsersManager.GetCurrentUserInformationAsync(null);
             foreach (var prop in user2.GetType().GetProperties())
             {
                 Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user2, null));
             }
-            object[] index = {1};
+            object[] index ={1};
             //Console.WriteLine(user2.GetType().GetProperty("TrackingCodes").GetValue(user2,index));
             //Console.WriteLine(user.GetType().GetProperty("TrackingCodes").GetValue(user, index)); 
-            Array a = (Array) user.GetType().GetProperty("TrackingCodes").GetValue(user);
-
+            Array a = (Array)user.GetType().GetProperty("TrackingCodes").GetValue(user);
+            
             for (var i = 0; i < a.Length; i++)
             {
                 var o = a.GetValue(i);
                 Console.WriteLine((a.GetValue(i)));
             }
-            //fields.ForEach(i => Console.Write("{0}\t", i));
+                //fields.ForEach(i => Console.Write("{0}\t", i));
 
-            //user2.Name = "JAMES MCJOHN";
-            //user2.Phone = "7154848651";
-            //user2.Enterprise =null;
+                //user2.Name = "JAMES MCJOHN";
+                //user2.Phone = "7154848651";
+                //user2.Enterprise =null;
+              
+                
+                int beg = 500;
+                var limit = (uint)(int)beg;
+                var offset = limit - 500; 
 
+                //var listofusers = await client.UsersManager.GetEnterpriseUsersAsync();
 
-            int beg = 500;
-            var limit = (uint) (int) beg;
-            var offset = limit - 500;
+                //Console.WriteLine("");
+                //foreach (var prop in user3.GetType().GetProperties())
+                //{
+                //    Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user2, null));
+                //}
 
-            //var listofusers = await client.UsersManager.GetEnterpriseUsersAsync();
+                Console.WriteLine("");
 
-            //Console.WriteLine("");
-            //foreach (var prop in user3.GetType().GetProperties())
-            //{
-            //    Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user2, null));
-            //}
+                //foreach (var prop in listofusers.GetType().GetProperties())
+                //{
+                //    Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user2, null));
+                //}
 
-            Console.WriteLine("");
-
-            //foreach (var prop in listofusers.GetType().GetProperties())
-            //{
-            //    Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(user2, null));
-            //}
-
-            //await LoadFolder(root);
+                //await LoadFolder(root);
         }
+
     }
 }
